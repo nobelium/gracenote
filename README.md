@@ -1,6 +1,12 @@
 # Gracenote
 
-TODO: Write a gem description
+A simple ruby wrapper gem for the Gracenote Music API, which can retrieve Artist, Album and Track metadata with the most common options.
+
+Gracenote allows you to look up artists, albums, and tracks in the Gracenote database, and returns a number of metadata fields, including:
+
+Basic metadata like Artist Name, Album Title, Track Title.
+Descriptors like Genre, Origin, Mood, Tempo.
+Related content like Album Art, Artist Image, Biographies.
 
 ## Installation
 
