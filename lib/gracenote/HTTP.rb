@@ -1,56 +1,30 @@
+#
+# HTTP class for Gracenote
+#
+# Used to send get/post request to the webapi
+#
 require 'curb'
+require 'rake'
 
-module Gracenote
-	class HTTP
+class HTTP
+  def self.get(path, data='', cookie='')
+    uri = URI(path)
+    req = Net::HTTP.new(uri.host, uri.port)
+    req.use_ssl = (uri.scheme == "https") ? true : false
+    
+    reqdata = Rack::Utils.build_nested_query(data)
+    resp = req.get( uri.path, reqdata, headers)
+    return resp
+  end
+  
+  def self.post(path, data='', cookie='')
+    uri = URI(path)
+    req = Net::HTTP.new(uri.host, uri.port)
+    req.use_ssl = (uri.scheme == "https") ? true : false
+    
+    reqdata = Rack::Utils.build_nested_query(data)
+    resp = req.request_post( uri.path, reqdata, headers)     
+    return resp
+  end
 
-		attr_accessor :URL , :timeout
-
-		def initialize (spec)
-			@URL = spec[:url]
-			@timeout = spec[:timeout] || 10000			
-		end
-
-		protected
-		def prepareREQ
-		end
-
-		def sendREQ
-			if @type == "GET"
-				return sendGET
-			elsif @type == "POST"
-				return sendPOST
-			end
-		end
-
-		def sendGET 
-			c = Curl::Easy.new(@URL)
-			c.perform
-			return c.body_str
-		end
-
-		def sendPOST
-			c = Curl::Easy.new(@URL)
-			c.http_post ()
-			return c.body_str
-		end
-
-		def setGET
-			@type = "GET"
-		end
-
-		def setPOST
-			@type = "POST"
-		end
-
-		public
-		def get
-			setGET
-			sendREQ
-		end
-
-		def post
-			setPOST
-			sendREQ
-		end
-	end
 end

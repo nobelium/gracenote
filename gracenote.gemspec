@@ -8,12 +8,12 @@ Gem::Specification.new do |spec|
   spec.version       = Gracenote::VERSION
   spec.authors       = ["nobelium"]
   spec.email         = ["me@vignesh.info"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Gracenote web api gem"
+  spec.summary       = "This gem is a wrapper for the gracenote web api"
   spec.homepage      = ""
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = ["lib/gracenote.rb", "lib/gracenote/HTTP.rb"]
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
