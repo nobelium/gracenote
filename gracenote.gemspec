@@ -5,12 +5,12 @@ require 'gracenote/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "gracenote"
-  spec.version       = Gracenote::VERSION
+  spec.version       = "0.0.3"
   spec.authors       = ["nobelium"]
   spec.email         = ["me@vignesh.info"]
   spec.description   = "Gracenote web api gem"
   spec.summary       = "This gem is a wrapper for the gracenote web api"
-  spec.homepage      = ""
+  spec.homepage      = "http://rubygems.org/gems/gracenote"
   spec.license       = "MIT"
 
   spec.files         = ["lib/gracenote.rb", "lib/gracenote/HTTP.rb"]
@@ -22,5 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_dependency "curb"
+  spec.add_dependency "ox"
   
 end

@@ -22,6 +22,10 @@ Or install it yourself as:
 
     $ gem install gracenote
 
+## Rubygem
+	
+	<a href="https://rubygems.org/gems/gracenote"></a>https://rubygems.org/gems/gracenote</a>
+
 ## Usage
 
 TODO: Write usage instructions here
