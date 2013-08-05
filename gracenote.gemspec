@@ -1,7 +1,6 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'gracenote/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "gracenote"
@@ -22,6 +21,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_dependency "curb"
-  spec.add_dependency "ox"
+  spec.add_dependency "crack"
   
 end

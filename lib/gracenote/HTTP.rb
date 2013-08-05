@@ -3,23 +3,20 @@
 #
 # Used to send get/post request to the webapi
 #
+require 'net/http'
+require 'net/https'
 require 'curb'
-require 'rake'
+require 'rack'
+require 'uri'
 
 class HTTP
-  def self.get(path, data='', cookie='')
+  def self.get(path, cookie='')
     uri = URI(path)
     req = Net::HTTP.new(uri.host, uri.port)
     req.use_ssl = (uri.scheme == "https") ? true : false
-    headers = cookie.nil? ? "" : cookie;
+    headers = {'Cookie' => cookie}
     
-    if data.class == 'string'
-      reqdata = data;
-    else
-      reqdata = Rack::Utils.build_nested_query(data)
-    end
-    
-    resp = req.get( uri.path, reqdata, headers)
+    resp = req.get( uri.path, headers)
     return resp
   end
   
@@ -27,9 +24,9 @@ class HTTP
     uri = URI(path)
     req = Net::HTTP.new(uri.host, uri.port)
     req.use_ssl = (uri.scheme == "https") ? true : false
-    headers = cookie.nil? ? "" : cookie;
+    headers = {'Cookie' => cookie, "Content-Type" => "application/xml"}
 
-    if data.class == 'string'
+    if data.class.to_s == 'String'
       reqdata = data;
     else
       reqdata = Rack::Utils.build_nested_query(data)
