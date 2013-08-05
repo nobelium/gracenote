@@ -214,7 +214,7 @@ class Gracenote
     end
     output = Array.new()
     json['RESPONSES']['RESPONSE']['ALBUM'].each do |a|
-      obj = Hash.new() 
+      obj = Hash.new 
       
       obj[:album_gnid]         = a["GN_ID"].to_s
       obj[:album_artist_name]  = a["ARTIST"].to_s
