@@ -2,8 +2,18 @@ require "gracenote/HTTP"
 require "crack"
 
 class Gracenote
+
+  # class variables
   @@ALL_RESULTS = '1'
   @@BEST_MATCH_ONLY = '0'
+
+  # initialize function
+  # sets
+  #   clientID
+  #   clientTag
+  #   userID
+  #   apiURL
+
   def initialize (spec)
     if(spec[:clientID].nil? || spec[:clientID] == "") 
       raise "clientID cannot be nil"
@@ -18,7 +28,11 @@ class Gracenote
     @apiURL = "https://c" + @clientID + ".web.cddbp.net/webapi/xml/1.0/"
   end
   
+  # public methods
   public 
+
+  # registerUser function
+  # registers a user and returns userID
   def registerUser (clientID = nil)
     if(clientID.nil?)
       clientID = @clientID + "-" + @clientTag
@@ -42,6 +56,13 @@ class Gracenote
     return @userID
   end
   
+  # findTrack function
+  # finds a track
+  # arguments 
+  #   artistName
+  #   albumTitle
+  #   trackTitle
+  #   matchMode
   def findTrack(artistName, albumTitle, trackTitle, matchMode = @@ALL_RESULTS)
     if @userID == nil 
       registerUser
@@ -162,25 +183,6 @@ class Gracenote
   end
   
   def checkRES resp
-    p xml
-    p resp
-    return xml
-    status = xml['RESPONSE'][:status]
-    case status
-    when 'ERROR'
-      raise  'XML PARSE ERROR'
-    when 'NO_MATCH'
-      raise 'XML NO MATCH FOUND'
-    else 
-      if status != 'OK'
-        raise 'STATUS NOT OK'
-      end 
-    end
-
-    return xml
-  end
-  
-  def checkRES resp
     if resp.code.to_s != '200'
       raise "Problem!! Got #{resp.code} with #{resp.message}"
     end
@@ -212,11 +214,18 @@ class Gracenote
     rescue Exception => e
       raise e
     end
-    output = Array.new()
-    json['RESPONSES']['RESPONSE']['ALBUM'].each do |a|
+    output = Array.new
+    data = Array.new
+    if json['RESPONSES']['RESPONSE']['ALBUM'].class.to_s != 'Array'
+      data.push json['RESPONSES']['RESPONSE']['ALBUM']
+    else 
+      data = json['RESPONSES']['RESPONSE']['ALBUM']
+    end
+    
+    data.each do |a|
       obj = Hash.new 
       
-      obj[:album_gnid]         = a["GN_ID"].to_s
+      obj[:album_gnid]         = a["GN_ID"].to_i
       obj[:album_artist_name]  = a["ARTIST"].to_s
       obj[:album_title]        = a["TITLE"].to_s
       obj[:album_year]         = a["DATE"].to_s
@@ -229,7 +238,7 @@ class Gracenote
       obj[:review_url]        = _getAttribElem(a["URL"], "TYPE", "REVIEW")
 
       # If we have artist OET info, use it.
-      if not a["ARTIST_ORIGIN"].nil
+      if not a["ARTIST_ORIGIN"].nil?
         obj[:artist_era]    = _getOETElem(a["ARTIST_ERA"])
         obj[:artist_type]   = _getOETElem(a["ARTIST_TYPE"])
         obj[:artist_origin] = _getOETElem(a["ARTIST_ORIGIN"])
@@ -240,10 +249,16 @@ class Gracenote
 
       # Parse track metadata if there is any.
       obj[:tracks] = Array.new()
-      a["TRACK"].each do |t|
-        track = Array.new()
+      tracks = Array.new()
+      if a["TRACK"].class.to_s != 'Array'
+        tracks.push a["TRACK"]
+      else 
+        tracks = a["TRACK"]
+      end
+      tracks.each do |t|
+        track = Hash.new()
 
-        track[:track_number]      = t["TRACK_NUM"].to_i
+        track[:track_number]      = t["TRACK_NUM"].to_s
         track[:track_gnid]        = t["GN_ID"].to_s
         track[:track_title]       = t["TITLE"].to_s
         track[:track_artist_name] = t["ARTIST"].to_s
@@ -263,10 +278,10 @@ class Gracenote
         if not t["ARTIST_ERA"].nil?
           obj[:artist_era]    = _getOETElem(t["ARTIST_ERA"])
         end
-        if not t["ARTIST_TYPE"]
+        if not t["ARTIST_TYPE"].nil?
           obj[:artist_type]   = _getOETElem(t["ARTIST_TYPE"])
         end
-        if not t["ARTIST_ORIGIN"]
+        if not t["ARTIST_ORIGIN"].nil?
           obj[:artist_origin] = _getOETElem(t["ARTIST_ORIGIN"])
         end
         obj[:tracks].push track
@@ -292,7 +307,13 @@ class Gracenote
 
   def _getOETElem (data)
     output = Array.new()
-    data.each do |g|
+    input = Array.new()
+    if data.class.to_s != 'Array'
+      input.push data
+    else 
+      input = data
+    end
+    input.each do |g|
       output.push({:id => g["ID"].to_i, :text => g})
     end
     return output
