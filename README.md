@@ -25,7 +25,7 @@ Or install it yourself as:
 
 ## Rubygem
 	
-	<a href="https://rubygems.org/gems/gracenote">https://rubygems.org/gems/gracenote</a>
+<a href="https://rubygems.org/gems/gracenote">https://rubygems.org/gems/gracenote</a>
 
 ## Usage
 
