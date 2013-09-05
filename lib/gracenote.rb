@@ -7,13 +7,12 @@ class Gracenote
   @@ALL_RESULTS = '1'
   @@BEST_MATCH_ONLY = '0'
 
-  # initialize function
-  # sets
+  # Function: initialize
+  # Sets the following instance variables
   #   clientID
   #   clientTag
   #   userID
   #   apiURL
-
   def initialize (spec)
     if(spec[:clientID].nil? || spec[:clientID] == "") 
       raise "clientID cannot be nil"
@@ -31,8 +30,8 @@ class Gracenote
   # public methods
   public 
 
-  # registerUser function
-  # registers a user and returns userID
+  # Function: registerUser 
+  # Registers a user and returns userID
   def registerUser (clientID = nil)
     if(clientID.nil?)
       clientID = @clientID + "-" + @clientTag
@@ -56,9 +55,9 @@ class Gracenote
     return @userID
   end
   
-  # findTrack function
-  # finds a track
-  # arguments 
+  # Function: findTrack 
+  # Finds a track
+  # Arguments:
   #   artistName
   #   albumTitle
   #   trackTitle
@@ -72,14 +71,30 @@ class Gracenote
     return api(data);
   end
   
+  # Function: findArtist 
+  # Finds a Artist
+  # Arguments:
+  #   artistName
+  #   matchMode
   def findArtist(artistName, matchMode = @@ALL_RESULTS)
     return findTrack(artistName, "", "", matchMode)
   end
-  
+
+  # Function: findAlbum
+  # finds an Album
+  # Arguments:
+  #   artistName
+  #   albumTitle
+  #   trackTitle
+  #   matchMode  
   def findAlbum(artistName, albumTitle, matchMode = @@ALL_RESULTS)
     return findTrack(artistName, albumTitle, "", matchMode)
   end
   
+  # Function: albumToc
+  # Fetches album metadata based on a table of contents.
+  # Arguments:
+  #   toc
   def albumToc(toc)
     if @userID == nil 
       registerUser
@@ -89,6 +104,10 @@ class Gracenote
     return api(data)
   end
 
+  # Function: fetchOETData
+  # Gets data based on gn_id
+  # Arguments:
+  #   gn_id
   def fetchOETData(gn_id)
     if @userID == nil 
       registerUser
@@ -117,14 +136,22 @@ class Gracenote
     return output
   end
   
-
+  # protected methods
   protected
-  #execute a query on gracenote webapi
+  # Function: api
+  # execute a query on gracenote webapi
+  # Arguments:
+  #   query
   def api (query)
     resp = HTTP.post(@apiURL, query)
     return parseRES(resp)
   end
   
+  # Function: constructQueryReq
+  # Constructs Query
+  # Arguments:
+  #   body
+  #   command
   def constructQueryReq(body, command = "ALBUM_SEARCH")
     #construct the XML query
     return  "<QUERIES>
@@ -138,6 +165,15 @@ class Gracenote
             </QUERIES>"
   end
   
+  # Function: constructQueryBody
+  # Constructs query body
+  # Arguments:
+  #   artist
+  #   album
+  #   track
+  #   gn_id
+  #   command
+  #   matchMode
   def constructQueryBody(artist, album, track, gn_id, command = "ALBUM_SEARCH", matchMode = @@ALL_RESULTS)
     body = ""
     # If a fetch scenario, user the Gracenote ID.
@@ -182,6 +218,10 @@ class Gracenote
     return body
   end
   
+  # Function: checkRES
+  # Checks an XML response and converts it into json
+  # Arguments:
+  #   resp
   def checkRES resp
     if resp.code.to_s != '200'
       raise "Problem!! Got #{resp.code} with #{resp.message}"
@@ -207,6 +247,10 @@ class Gracenote
     return json
   end
   
+  # Function: parseRES
+  # Parse's an XML response
+  # Arguments:
+  #   resp
   def parseRES resp
     json = nil
     begin
@@ -291,11 +335,18 @@ class Gracenote
     return output
   end
 
-
+  # Function: merge_recursively
+  # Merges two hash maps
   def merge_recursively(a, b)
     a.merge(b) {|key, a_item, b_item| merge_recursively(a_item, b_item) }
   end
   
+  # Function: _getAttribElem
+  # Gets key value pair from a url
+  # Arguments:
+  #   data
+  #   attribute
+  #   value
   def _getAttribElem(data, attribute, value)
     data.each do |g|
       attrib = Rack::Utils.parse_query URI(g).query
@@ -305,6 +356,10 @@ class Gracenote
     end
   end
 
+  # Function: _getOETElem
+  # Converts an Array to hashmap
+  # Arguments:
+  #   data
   def _getOETElem (data)
     output = Array.new()
     input = Array.new()
