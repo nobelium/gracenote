@@ -1,5 +1,4 @@
-# Gracenote
-
+## Gracenote [![Build Status](https://secure.travis-ci.org/rubygems/rubygems.org.png?branch=master)][travis]
 A simple ruby wrapper gem for the Gracenote Music API, which can retrieve Artist, Album and Track metadata with the most common options.
 
 Inspired from <a href="https://github.com/cweichen/pygn">pygn project</a>.
