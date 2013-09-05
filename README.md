@@ -1,7 +1,7 @@
 ## Gracenote ![Build Status](https://secure.travis-ci.org/rubygems/rubygems.org.png?branch=master)
 A simple ruby wrapper gem for the Gracenote Music API, which can retrieve Artist, Album and Track metadata with the most common options.
 
-Inspired from <a href="https://github.com/cweichen/pygn">pygn project</a>.
+Inspired by <a href="https://github.com/cweichen/pygn">pygn project</a>.
 
 Gracenote allows you to look up artists, albums, and tracks in the Gracenote database, and returns a number of metadata fields, including:
 
