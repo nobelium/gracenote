@@ -4,8 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "gracenote"
-  spec.version       = "1.0.0"
-  spec.authors       = ["nobelium"]
+  spec.version       = "2.0.0"
+  spec.authors       = ["MattNewberry", "nobelium"]
   spec.email         = ["me@vignesh.info"]
   spec.description   = "Gracenote web api gem"
   spec.summary       = "This gem is a wrapper for the gracenote web api"

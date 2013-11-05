@@ -3,28 +3,25 @@
 #
 # Used to send get/post request to the webapi
 #
-require 'net/http'
-require 'net/https'
-require 'curb'
 require 'rack'
-require 'uri'
+require 'curb'
+require 'timeout'
 
 class HTTP
-  def self.get(path, cookie='')
-    uri = URI(path)
-    req = Net::HTTP.new(uri.host, uri.port)
-    req.use_ssl = (uri.scheme == "https") ? true : false
-    headers = {'Cookie' => cookie}
+  @timeout = 10
+
+  def self.get(path)
     
-    resp = req.get( uri.path, headers)
-    return resp
+    resp = nil
+    Timeout.timeout @timeout do
+      resp = Curl.get(path)
+    end
+
+    resp
   end
   
-  def self.post(path, data='', cookie='')
-    uri = URI(path)
-    req = Net::HTTP.new(uri.host, uri.port)
-    req.use_ssl = (uri.scheme == "https") ? true : false
-    headers = {'Cookie' => cookie, "Content-Type" => "application/xml"}
+  def self.post(path, data='')
+    headers = {"Content-Type" => "application/xml"}
 
     if data.class.to_s == 'String'
       reqdata = data;
@@ -32,8 +29,12 @@ class HTTP
       reqdata = Rack::Utils.build_nested_query(data)
     end
 
-    resp = req.request_post( uri.path, reqdata, headers)     
-    return resp
+    resp = nil
+    Timeout.timeout @timeout do
+      resp = Curl.post(path, reqdata)
+    end
+
+    resp
   end
 
 end

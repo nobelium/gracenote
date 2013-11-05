@@ -1,4 +1,4 @@
-require "gracenote/HTTP"
+require_relative "gracenote/HTTP"
 require "crack"
 
 class Gracenote
@@ -44,13 +44,19 @@ class Gracenote
 
     #send req to server and get user ID
     data =  "<QUERIES>
-              <QUERY CMD='REGISTER'>
-                <CLIENT>"+ clientID +"</CLIENT>
-              </QUERY>
-            </QUERIES>"
+  <QUERY CMD=\"REGISTER\">
+    <CLIENT>"+ clientID +"</CLIENT>
+  </QUERY>
+</QUERIES>"
+
     resp = HTTP.post(@apiURL, data)
+    puts resp
+
     resp = checkRES resp
     @userID = resp['RESPONSES']['RESPONSE']['USER']
+
+    puts resp
+    puts @userID
 
     return @userID
   end
@@ -66,9 +72,12 @@ class Gracenote
     if @userID == nil 
       registerUser
     end
-    body = constructQueryBody(artistName, albumTitle, trackTitle, "", "ALBUM_SEARCH", matchMode)
+    body = constructAlbumQueryBody(artistName, albumTitle, trackTitle, "", "ALBUM_SEARCH", matchMode)
     data = constructQueryReq(body)
-    return api(data);
+    resp = HTTP.post(@apiURL, data)
+    resp = checkRES resp
+
+    symbolize(resp["RESPONSES"])
   end
   
   # Function: findArtist 
@@ -100,8 +109,11 @@ class Gracenote
       registerUser
     end
     body = "<TOC><OFFSETS>" + toc + "</OFFSETS></TOC>"
-    data = constructQueryBody(body, "ALBUM_TOC")
-    return api(data)
+    data = constructAlbumQueryBody(body, "ALBUM_TOC")
+    resp = HTTP.post(@apiURL, data)
+    resp = checkRES resp
+
+    symbolize(resp["RESPONSES"])
   end
 
   # Function: fetchOETData
@@ -126,25 +138,123 @@ class Gracenote
     data = constructQueryReq(body, "ALBUM_FETCH")
     resp = HTTP.post(@apiURL, data)
     resp = checkRES resp
-    
-    json = resp["RESPONSES"]
 
-    output = Array.new()
-    output[:artist_origin] = json["RESPONSE"]["ALBUM"]["ARTIST_ORIGIN"].nil? ? "" : _getOETElem(json["RESPONSE"]["ALBUM"]["ARTIST_ORIGIN"]) 
-    output[:artist_era]    = json["RESPONSE"]["ALBUM"]["ARTIST_ERA"].nil? ? "" : _getOETElem(json["RESPONSE"]["ALBUM"]["ARTIST_ERA"])
-    output[:artist_type]   = json["RESPONSE"]["ALBUM"]["ARTIST_TYPE"].nil? ? "" : _getOETElem(json["RESPONSE"]["ALBUM"]["ARTIST_TYPE"])
-    return output
+    symbolize(resp["RESPONSES"])
+  end
+
+  # Function: fetchSeason
+  # Fetch details for a season based on gn_id
+  # Arguments:
+  #   gn_id
+  def fetchSeason(gn_id)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<GN_ID>" + gn_id + "</GN_ID>"
+
+    data = constructQueryReq(body, "SEASON_FETCH")
+    resp = HTTP.post(@apiURL, data)
+    resp = checkRES resp
+
+    symbolize(resp["RESPONSES"]["RESPONSE"]["SEASON"])
+  end
+
+  # Function: findTVShow
+  # Searches for TV shows matching text
+  # Arguments:
+  #   text
+  def findTVShow(text)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<TEXT TYPE='TITLE'>" + text + "</TEXT>
+  <MODE>SINGLE_BEST</MODE>
+  <OPTION>
+    <PARAMETER>SELECT_EXTENDED</PARAMETER>
+    <VALUE>IMAGE</VALUE>
+  </OPTION>"
+
+    data = constructQueryReq(body, "SERIES_SEARCH")
+    resp = HTTP.post(@apiURL, data)
+    resp = checkRES resp
+
+    symbolize(resp["RESPONSES"]["RESPONSE"])
+  end
+
+  # Function: fetchContributor
+  # Fetch details for a contributor based on gn_id
+  # Arguments:
+  #   gn_id
+  def fetchContributor(gn_id)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<GN_ID>" + gn_id + "</GN_ID>
+  <OPTION>
+    <PARAMETER>SELECT_EXTENDED</PARAMETER>
+    <VALUE>IMAGE,MEDIAGRAPHY_IMAGES</VALUE>
+  </OPTION>"
+
+    data = constructQueryReq(body, "CONTRIBUTOR_FETCH")
+    resp = HTTP.post(@apiURL, data)
+    resp = checkRES resp
+
+    symbolize(resp["RESPONSES"]["RESPONSE"]["CONTRIBUTOR"])
+  end
+
+  # Function: findContributor
+  # Searches for contributor matching text
+  # Arguments:
+  #   text
+  def findContributor(text)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<TEXT TYPE='NAME'>" + text + "</TEXT>
+  <MODE>SINGLE_BEST</MODE>
+  <OPTION>
+    <PARAMETER>SELECT_EXTENDED</PARAMETER>
+    <VALUE>IMAGE,MEDIAGRAPHY_IMAGES</VALUE>
+  </OPTION>"
+
+    data = constructQueryReq(body, "CONTRIBUTOR_SEARCH")
+    resp = HTTP.post(@apiURL, data)
+    resp = checkRES resp
+
+    symbolize(resp["RESPONSES"]["RESPONSE"])
+  end
+
+  # Function: fetchTVShow
+  # Fetch details for a show based on gn_id
+  # Arguments:
+  #   gn_id
+  def fetchTVShow(gn_id)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<GN_ID>" + gn_id + "</GN_ID>"
+
+    data = constructQueryReq(body, "SERIES_FETCH")
+    resp = HTTP.post(@apiURL, data)
+    resp = checkRES resp
+
+    symbolize(resp["RESPONSES"]["RESPONSE"]["SERIES"])
   end
   
   # protected methods
   protected
-  # Function: api
-  # execute a query on gracenote webapi
-  # Arguments:
-  #   query
-  def api (query)
-    resp = HTTP.post(@apiURL, query)
-    return parseRES(resp)
+
+  # Function: symbolize
+  # normalize a response
+  def symbolize(obj)
+      return obj.inject({}){|memo,(k,v)| memo[k.downcase.to_sym] =  symbolize(v); memo} if obj.is_a? Hash
+      return obj.inject([]){|memo,v    | memo << symbolize(v); memo} if obj.is_a? Array
+      return obj
   end
   
   # Function: constructQueryReq
@@ -165,7 +275,7 @@ class Gracenote
             </QUERIES>"
   end
   
-  # Function: constructQueryBody
+  # Function: constructAlbumQueryBody
   # Constructs query body
   # Arguments:
   #   artist
@@ -174,7 +284,7 @@ class Gracenote
   #   gn_id
   #   command
   #   matchMode
-  def constructQueryBody(artist, album, track, gn_id, command = "ALBUM_SEARCH", matchMode = @@ALL_RESULTS)
+  def constructAlbumQueryBody(artist, album, track, gn_id, command = "ALBUM_SEARCH", matchMode = @@ALL_RESULTS)
     body = ""
     # If a fetch scenario, user the Gracenote ID.
     if command == "ALBUM_FETCH"
@@ -223,12 +333,12 @@ class Gracenote
   # Arguments:
   #   resp
   def checkRES resp
-    if resp.code.to_s != '200'
-      raise "Problem!! Got #{resp.code} with #{resp.message}"
+    if resp.status != '200'
+      #raise "Problem!! Got #{resp.code} with #{resp.message}"
     end
     json = nil
     begin
-      json = Crack::XML.parse resp.body
+      json = Crack::XML.parse resp.body_str
     rescue Exception => e
       raise e
     end
@@ -245,132 +355,5 @@ class Gracenote
         end
      end 
     return json
-  end
-  
-  # Function: parseRES
-  # Parse's an XML response
-  # Arguments:
-  #   resp
-  def parseRES resp
-    json = nil
-    begin
-      json = checkRES resp
-    rescue Exception => e
-      raise e
-    end
-    output = Array.new
-    data = Array.new
-    if json['RESPONSES']['RESPONSE']['ALBUM'].class.to_s != 'Array'
-      data.push json['RESPONSES']['RESPONSE']['ALBUM']
-    else 
-      data = json['RESPONSES']['RESPONSE']['ALBUM']
-    end
-    
-    data.each do |a|
-      obj = Hash.new 
-      
-      obj[:album_gnid]         = a["GN_ID"].to_i
-      obj[:album_artist_name]  = a["ARTIST"].to_s
-      obj[:album_title]        = a["TITLE"].to_s
-      obj[:album_year]         = a["DATE"].to_s
-      obj[:genre]              = _getOETElem(a["GENRE"])
-      obj[:album_art_url]      = _getAttribElem(a["URL"], "TYPE", "COVERART")
-
-      # Artist metadata
-      obj[:artist_image_url]  = _getAttribElem(a["URL"], "TYPE", "ARTIST_IMAGE")
-      obj[:artist_bio_url]    = _getAttribElem(a["URL"], "TYPE", "ARTIST_BIOGRAPHY")
-      obj[:review_url]        = _getAttribElem(a["URL"], "TYPE", "REVIEW")
-
-      # If we have artist OET info, use it.
-      if not a["ARTIST_ORIGIN"].nil?
-        obj[:artist_era]    = _getOETElem(a["ARTIST_ERA"])
-        obj[:artist_type]   = _getOETElem(a["ARTIST_TYPE"])
-        obj[:artist_origin] = _getOETElem(a["ARTIST_ORIGIN"])
-      else
-      # If not available, do a fetch to try and get it instead.
-        obj = merge_recursively(obj, fetchOETData(a["GN_ID"]) )
-      end
-
-      # Parse track metadata if there is any.
-      obj[:tracks] = Array.new()
-      tracks = Array.new()
-      if a["TRACK"].class.to_s != 'Array'
-        tracks.push a["TRACK"]
-      else 
-        tracks = a["TRACK"]
-      end
-      tracks.each do |t|
-        track = Hash.new()
-
-        track[:track_number]      = t["TRACK_NUM"].to_s
-        track[:track_gnid]        = t["GN_ID"].to_s
-        track[:track_title]       = t["TITLE"].to_s
-        track[:track_artist_name] = t["ARTIST"].to_s
-
-        # If no specific track artist, use the album one.
-        if t["ARTIST"].nil? 
-          track[:track_artist_name] = obj[:album_artist_name]
-        end
-        
-        track[:mood]              = _getOETElem(t["MOOD"])
-        track[:tempo]             = _getOETElem(t["TEMPO"])
-
-        # If track level GOET data exists, overwrite metadata from album.
-        if not t["GENRE"].nil? 
-          obj[:genre]         = _getOETElem(t["GENRE"])
-        end
-        if not t["ARTIST_ERA"].nil?
-          obj[:artist_era]    = _getOETElem(t["ARTIST_ERA"])
-        end
-        if not t["ARTIST_TYPE"].nil?
-          obj[:artist_type]   = _getOETElem(t["ARTIST_TYPE"])
-        end
-        if not t["ARTIST_ORIGIN"].nil?
-          obj[:artist_origin] = _getOETElem(t["ARTIST_ORIGIN"])
-        end
-        obj[:tracks].push track
-      end
-      output.push obj
-    end
-    return output
-  end
-
-  # Function: merge_recursively
-  # Merges two hash maps
-  def merge_recursively(a, b)
-    a.merge(b) {|key, a_item, b_item| merge_recursively(a_item, b_item) }
-  end
-  
-  # Function: _getAttribElem
-  # Gets key value pair from a url
-  # Arguments:
-  #   data
-  #   attribute
-  #   value
-  def _getAttribElem(data, attribute, value)
-    data.each do |g|
-      attrib = Rack::Utils.parse_query URI(g).query
-      if(attrib[attribute] == value) 
-        return g
-      end
-    end
-  end
-
-  # Function: _getOETElem
-  # Converts an Array to hashmap
-  # Arguments:
-  #   data
-  def _getOETElem (data)
-    output = Array.new()
-    input = Array.new()
-    if data.class.to_s != 'Array'
-      input.push data
-    else 
-      input = data
-    end
-    input.each do |g|
-      output.push({:id => g["ID"].to_i, :text => g})
-    end
-    return output
   end
 end
