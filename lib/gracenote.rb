@@ -160,17 +160,41 @@ class Gracenote
     symbolize(resp["RESPONSES"]["RESPONSE"]["SEASON"])
   end
 
-  # Function: findTVShow
-  # Searches for TV shows matching text
+  # Function: fetchTVShow
+  # Fetch details for a show based on gn_id
   # Arguments:
-  #   text
-  def findTVShow(text)
+  #   gn_id
+  def fetchTVShow(gn_id)
     if @userID == nil 
       registerUser
     end
 
+    body = "<GN_ID>" + gn_id + "</GN_ID>
+    <OPTION>
+      <PARAMETER>SELECT_EXTENDED</PARAMETER>
+      <VALUE>IMAGE</VALUE>
+    </OPTION>"
+
+    data = constructQueryReq(body, "SERIES_FETCH")
+    resp = HTTP.post(@apiURL, data)
+    resp = checkRES resp
+
+    symbolize(resp["RESPONSES"]["RESPONSE"]["SERIES"])
+  end
+
+  # Function: findTVShow
+  # Searches for TV shows matching text
+  # Arguments:
+  #   text
+  def findTVShow(text, single=true)
+    if @userID == nil 
+      registerUser
+    end
+
+    singleText = single ? '<MODE>SINGLE_BEST</MODE>' : ''
+
     body = "<TEXT TYPE='TITLE'>" + text + "</TEXT>
-  <MODE>SINGLE_BEST</MODE>
+  #{singleText}
   <OPTION>
     <PARAMETER>SELECT_EXTENDED</PARAMETER>
     <VALUE>IMAGE</VALUE>
@@ -226,24 +250,6 @@ class Gracenote
     resp = checkRES resp
 
     symbolize(resp["RESPONSES"]["RESPONSE"])
-  end
-
-  # Function: fetchTVShow
-  # Fetch details for a show based on gn_id
-  # Arguments:
-  #   gn_id
-  def fetchTVShow(gn_id)
-    if @userID == nil 
-      registerUser
-    end
-
-    body = "<GN_ID>" + gn_id + "</GN_ID>"
-
-    data = constructQueryReq(body, "SERIES_FETCH")
-    resp = HTTP.post(@apiURL, data)
-    resp = checkRES resp
-
-    symbolize(resp["RESPONSES"]["RESPONSE"]["SERIES"])
   end
   
   # protected methods
@@ -343,17 +349,6 @@ class Gracenote
       raise e
     end
 
-    status = json['RESPONSES']['RESPONSE']['STATUS'].to_s
-    case status
-      when "ERROR"
-        raise "ERROR in response"
-      when "NO_MATCH"
-        raise "No match found"
-      else
-        if status != "OK"
-          raise "Problems found in the response"
-        end
-     end 
     return json
   end
 end
