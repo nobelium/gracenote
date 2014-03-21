@@ -136,7 +136,45 @@ class Gracenote
     return output
   end
   
-  # protected methods
+  # TVShow methods
+
+  # Function: fetchSeason
+  # Fetches details of a season from gn_id
+  # Arguments:
+  #   gn_id
+  def fetchSeason (gn_id)
+  end
+
+  # Function: fetchTVShow
+  # Fetches details of TV Show from gn_id
+  # Arguments:
+  #   gn_id
+  def fetchTVShow (gn_id)
+  end
+
+  # Function: findTVShow
+  # Finds TVShows which matches the name
+  # Arguments:
+  #   name
+  #   single
+  def findTVShow (name, single=true)
+  end
+
+  # Function: fetchContributor
+  # Fetches details of a contributor from gn_id
+  # Arguments:
+  #   gn_id
+  def fetchContributor (gn_id)
+  end
+
+  # Function: findContributor
+  # Find details of a contributor from name
+  # Arguments:
+  #   name
+  def findContributor (name)
+  end
+
+  ###################################################### protected methods ######################################################
   protected
   # Function: api
   # execute a query on gracenote webapi
