@@ -13,6 +13,7 @@ class HTTP
   def self.get(path, cookie='')
     uri = URI(path)
     req = Net::HTTP.new(uri.host, uri.port)
+    req.read_timeout = 60
     req.use_ssl = (uri.scheme == "https") ? true : false
     headers = {'Cookie' => cookie}
     
@@ -23,6 +24,7 @@ class HTTP
   def self.post(path, data='', cookie='')
     uri = URI(path)
     req = Net::HTTP.new(uri.host, uri.port)
+    req.read_timeout = 60
     req.use_ssl = (uri.scheme == "https") ? true : false
     headers = {'Cookie' => cookie, "Content-Type" => "application/xml"}
 
