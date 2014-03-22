@@ -143,6 +143,14 @@ class Gracenote
   # Arguments:
   #   gn_id
   def fetchSeason (gn_id)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<GN_ID>" + gn_id + "</GN_ID>"
+    data = constructQueryReq(body, "SEASON_FETCH")
+
+    return api(data)
   end
 
   # Function: fetchTVShow
@@ -150,6 +158,19 @@ class Gracenote
   # Arguments:
   #   gn_id
   def fetchTVShow (gn_id)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<GN_ID>" + gn_id + "</GN_ID>
+              <OPTION>
+                <PARAMETER>SELECT_EXTENDED</PARAMETER>
+                <VALUE>IMAGE</VALUE>
+              </OPTION>"
+
+    data = constructQueryReq(body, "SERIES_FETCH")
+
+    return api(data)
   end
 
   # Function: findTVShow
@@ -158,6 +179,22 @@ class Gracenote
   #   name
   #   single
   def findTVShow (name, single=true)
+    if @userID == nil 
+      registerUser
+    end
+
+    singleText = single ? '<MODE>SINGLE_BEST</MODE>' : ''
+  
+    body = "<TEXT TYPE='TITLE'>" + text + "</TEXT>
+            " + singleText + "
+            <OPTION>
+              <PARAMETER>SELECT_EXTENDED</PARAMETER>
+              <VALUE>IMAGE</VALUE>
+            </OPTION>"
+
+    data = constructQueryReq(body, "SERIES_SEARCH")
+
+    return api(data)
   end
 
   # Function: fetchContributor
@@ -165,6 +202,19 @@ class Gracenote
   # Arguments:
   #   gn_id
   def fetchContributor (gn_id)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<GN_ID>" + gn_id + "</GN_ID>
+            <OPTION>
+              <PARAMETER>SELECT_EXTENDED</PARAMETER>
+              <VALUE>IMAGE,MEDIAGRAPHY_IMAGES</VALUE>
+            </OPTION>"
+
+    data = constructQueryReq(body, "CONTRIBUTOR_FETCH")
+
+    return api(data)
   end
 
   # Function: findContributor
@@ -172,6 +222,20 @@ class Gracenote
   # Arguments:
   #   name
   def findContributor (name)
+    if @userID == nil 
+      registerUser
+    end
+
+    body = "<TEXT TYPE='NAME'>" + text + "</TEXT>
+              <MODE>SINGLE_BEST</MODE>
+            <OPTION>
+              <PARAMETER>SELECT_EXTENDED</PARAMETER>
+              <VALUE>IMAGE,MEDIAGRAPHY_IMAGES</VALUE>
+            </OPTION>"
+
+    data = constructQueryReq(body, "CONTRIBUTOR_SEARCH")
+
+    return api(data)
   end
 
   ###################################################### protected methods ######################################################
