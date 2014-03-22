@@ -48,7 +48,7 @@ class Gracenote
                 <CLIENT>"+ clientID +"</CLIENT>
               </QUERY>
             </QUERIES>"
-    resp = HTTP.post(@apiURL, data)
+    resp = api(data)
     resp = checkRES resp
     @userID = resp['RESPONSES']['RESPONSE']['USER']
 
@@ -66,9 +66,9 @@ class Gracenote
     if @userID == nil 
       registerUser
     end
-    body = constructQueryBody(artistName, albumTitle, trackTitle, "", "ALBUM_SEARCH", matchMode)
-    data = constructQueryReq(body)
-    return api(data);
+    body = constructAlbumQueryBody(artistName, albumTitle, trackTitle, "", "ALBUM_SEARCH", matchMode)
+    data = api(constructQueryReq(body))
+    return parseAlbumRES(data);
   end
   
   # Function: findArtist 
@@ -100,8 +100,8 @@ class Gracenote
       registerUser
     end
     body = "<TOC><OFFSETS>" + toc + "</OFFSETS></TOC>"
-    data = constructQueryBody(body, "ALBUM_TOC")
-    return api(data)
+    data = constructAlbumQueryBody(body, "ALBUM_TOC")
+    return parseAlbumRES(data)
   end
 
   # Function: fetchOETData
@@ -124,7 +124,7 @@ class Gracenote
               </OPTION>"
 
     data = constructQueryReq(body, "ALBUM_FETCH")
-    resp = HTTP.post(@apiURL, data)
+    resp = api(data)
     resp = checkRES resp
     
     json = resp["RESPONSES"]
@@ -150,7 +150,8 @@ class Gracenote
     body = "<GN_ID>" + gn_id + "</GN_ID>"
     data = constructQueryReq(body, "SEASON_FETCH")
 
-    return api(data)
+    resp = api(data)
+    return checkRES(resp)
   end
 
   # Function: fetchTVShow
@@ -170,7 +171,8 @@ class Gracenote
 
     data = constructQueryReq(body, "SERIES_FETCH")
 
-    return api(data)
+    resp = api(data)
+    return checkRES(resp)
   end
 
   # Function: findTVShow
@@ -194,7 +196,8 @@ class Gracenote
 
     data = constructQueryReq(body, "SERIES_SEARCH")
 
-    return api(data)
+    resp = api(data)
+    return checkRES(resp)
   end
 
   # Function: fetchContributor
@@ -214,7 +217,8 @@ class Gracenote
 
     data = constructQueryReq(body, "CONTRIBUTOR_FETCH")
 
-    return api(data)
+    resp = api(data)
+    return checkRES(resp)
   end
 
   # Function: findContributor
@@ -234,8 +238,9 @@ class Gracenote
             </OPTION>"
 
     data = constructQueryReq(body, "CONTRIBUTOR_SEARCH")
-
-    return api(data)
+    
+    resp = api(data)
+    return checkRES(resp)
   end
 
   ###################################################### protected methods ######################################################
@@ -245,8 +250,7 @@ class Gracenote
   # Arguments:
   #   query
   def api (query)
-    resp = HTTP.post(@apiURL, query)
-    return parseRES(resp)
+    return HTTP.post(@apiURL, query)
   end
   
   # Function: constructQueryReq
@@ -267,7 +271,7 @@ class Gracenote
             </QUERIES>"
   end
   
-  # Function: constructQueryBody
+  # Function: constructAlbumQueryBody
   # Constructs query body
   # Arguments:
   #   artist
@@ -276,7 +280,7 @@ class Gracenote
   #   gn_id
   #   command
   #   matchMode
-  def constructQueryBody(artist, album, track, gn_id, command = "ALBUM_SEARCH", matchMode = @@ALL_RESULTS)
+  def constructAlbumQueryBody(artist, album, track, gn_id, command = "ALBUM_SEARCH", matchMode = @@ALL_RESULTS)
     body = ""
     # If a fetch scenario, user the Gracenote ID.
     if command == "ALBUM_FETCH"
@@ -349,11 +353,11 @@ class Gracenote
     return json
   end
   
-  # Function: parseRES
+  # Function: parseAlbumRES
   # Parse's an XML response
   # Arguments:
   #   resp
-  def parseRES resp
+  def parseAlbumRES resp
     json = nil
     begin
       json = checkRES resp
