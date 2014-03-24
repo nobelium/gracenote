@@ -187,7 +187,7 @@ class Gracenote
 
     singleText = single ? '<MODE>SINGLE_BEST</MODE>' : ''
   
-    body = "<TEXT TYPE='TITLE'>" + text + "</TEXT>
+    body = "<TEXT TYPE='TITLE'>" + name + "</TEXT>
             " + singleText + "
             <OPTION>
               <PARAMETER>SELECT_EXTENDED</PARAMETER>
@@ -230,7 +230,7 @@ class Gracenote
       registerUser
     end
 
-    body = "<TEXT TYPE='NAME'>" + text + "</TEXT>
+    body = "<TEXT TYPE='NAME'>" + name + "</TEXT>
               <MODE>SINGLE_BEST</MODE>
             <OPTION>
               <PARAMETER>SELECT_EXTENDED</PARAMETER>
