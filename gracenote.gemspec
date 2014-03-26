@@ -23,6 +23,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "curb"
   spec.add_dependency "crack"
-
+  spec.add_dependency "rack"
   
 end

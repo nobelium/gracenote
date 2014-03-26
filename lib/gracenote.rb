@@ -7,6 +7,8 @@ class Gracenote
   @@ALL_RESULTS = '1'
   @@BEST_MATCH_ONLY = '0'
 
+  attr_accessor :clientID, :clientTag, :userID, :apiURL
+
   # Function: initialize
   # Sets the following instance variables
   #   clientID
@@ -38,7 +40,7 @@ class Gracenote
     end
     
     if not @userID.nil?
-      p "user already registered. No need to register again"
+      puts "user already registered. No need to register again"
       return @userID
     end
 
