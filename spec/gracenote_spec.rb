@@ -6,7 +6,7 @@ describe Gracenote do
 
   describe "Configuration" do
     it "should allow to read clientID" do
-      id = obj.clientID
+      id = gn.clientID
       id.should == "7097600"
     end
 
@@ -45,7 +45,6 @@ describe Gracenote do
       gn.apiURL.should == "http://asdf.com"
       gn.apiURL = apiurl
     end
-
   end
 
 end
