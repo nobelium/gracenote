@@ -1,0 +1,82 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://c7097600.web.cddbp.net/webapi/xml/1.0/
+    body:
+      encoding: UTF-8
+      string: |-
+        <QUERIES>
+                        <AUTH>
+                            <CLIENT>7097600-35312F0A797B9FE6F24AC32CDE64AC5B</CLIENT>
+                            <USER>260455955426440098-6B2203CDDC1F35A06C7562D40EA538C0</USER>
+                        </AUTH>
+                        <QUERY CMD="ALBUM_SEARCH">
+                            <MODE>SINGLE_BEST_COVER</MODE><TEXT TYPE="ARTIST">Kings Of Convenience</TEXT><TEXT TYPE="TRACK_TITLE">Homesick</TEXT><TEXT TYPE="ALBUM_TITLE">Riot On An Empty Street</TEXT><OPTION>
+                      <PARAMETER>SELECT_EXTENDED</PARAMETER>
+                      <VALUE>COVER,REVIEW,ARTIST_BIOGRAPHY,ARTIST_IMAGE,ARTIST_OET,MOOD,TEMPO</VALUE>
+                    </OPTION><OPTION>
+                      <PARAMETER>SELECT_DETAIL</PARAMETER>
+                      <VALUE>GENRE:3LEVEL,MOOD:2LEVEL,TEMPO:3LEVEL,ARTIST_ORIGIN:4LEVEL,ARTIST_ERA:2LEVEL,ARTIST_TYPE:2LEVEL</VALUE>
+                    </OPTION><OPTION>
+                      <PARAMETER>COVER_SIZE</PARAMETER>
+                      <VALUE>MEDIUM</VALUE>
+                    </OPTION>
+                        </QUERY>
+                    </QUERIES>
+    headers:
+      Cookie:
+      - ''
+      Content-Type:
+      - application/xml
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 17 Apr 2014 11:52:34 GMT
+      Server:
+      - Apache/2.2.14 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.3.2-1ubuntu4.20
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '926'
+      Connection:
+      - close
+      Content-Type:
+      - text/xml
+    body:
+      encoding: UTF-8
+      string: "\n\n \n<RESPONSES>\n <RESPONSE STATUS=\"OK\">\n   <ALBUM>\n      <GN_ID>59247312-2ED193587EF0504C7A0C416ED66DA962</GN_ID>\n
+        \     <ARTIST>Kings Of Convenience</ARTIST>\n      <ARTIST_ORIGIN ORD=\"1\"
+        ID=\"29896\">Scandinavia</ARTIST_ORIGIN>\n      <ARTIST_ORIGIN ORD=\"2\" ID=\"29990\">Norway</ARTIST_ORIGIN>\n
+        \     <ARTIST_TYPE ORD=\"1\" ID=\"29422\">Male</ARTIST_TYPE>\n      <ARTIST_TYPE
+        ORD=\"2\" ID=\"29432\">Male Duo</ARTIST_TYPE>\n      <ARTIST_ERA ORD=\"1\"
+        ID=\"29483\">2000&apos;s</ARTIST_ERA>\n      <TITLE>Riot On An Empty Street</TITLE>\n
+        \     <PKG_LANG>ENG</PKG_LANG>\n      <DATE>2004</DATE>\n<GENRE ORD=\"1\"
+        NUM=\"61340\" ID=\"25312\">Alternative &amp; Punk</GENRE>\n<GENRE ORD=\"2\"
+        NUM=\"61357\" ID=\"25327\">Alternative Folk</GENRE>\n<GENRE ORD=\"3\" NUM=\"61541\"
+        ID=\"25441\">Alternative Folk</GENRE>\n      <MATCHED_TRACK_NUM>1</MATCHED_TRACK_NUM>\n
+        \     <TRACK_COUNT>12</TRACK_COUNT>\n      <TRACK>\n         <TRACK_NUM>1</TRACK_NUM>\n
+        \        <GN_ID>59247313-E198021B46C38679362C35619E93396B</GN_ID>\n         <TITLE>Homesick</TITLE>\n
+        \        <MOOD ORD=\"1\" ID=\"42949\">Melancholy</MOOD>\n         <MOOD ORD=\"2\"
+        ID=\"65343\">Light Melancholy</MOOD>\n         <TEMPO ORD=\"1\" ID=\"34283\">Medium
+        Tempo</TEMPO>\n         <TEMPO ORD=\"2\" ID=\"34289\">Medium Slow</TEMPO>\n
+        \        <TEMPO ORD=\"3\" ID=\"34311\">60s</TEMPO>\n      </TRACK>\n      <URL
+        TYPE=\"COVERART\" SIZE=\"MEDIUM\" WIDTH=\"450\" HEIGHT=\"442\">http://akamai-b.cdn.cddbp.net/cds/2.0/cover/8D43/DA98/8315/CC43_medium_front.jpg</URL>\n
+        \     <URL TYPE=\"ARTIST_BIOGRAPHY\">http://web.content.cddbp.net/cds/2.0?id=22DA84B96832BF4F&amp;client=7097600&amp;class=biography&amp;type=text/plain&amp;tag=02uCRNuRTU9bVjifHeKfVzyF0z8.nWlKAFdDCkiiEptEwJWEin0PCk6Q</URL>\n
+        \     <URL TYPE=\"ARTIST_IMAGE\" SIZE=\"MEDIUM\" WIDTH=\"450\" HEIGHT=\"419\">http://akamai-b.cdn.cddbp.net/cds/2.0/image-artist/7973/04D5/67E8/970F_medium_front.jpg</URL>\n
+        \     <URL TYPE=\"REVIEW\">http://web.content.cddbp.net/cds/2.0?id=4045DA976DB1DEFA&amp;client=7097600&amp;class=review&amp;type=text/plain&amp;tag=02MET5EvaoRrBhroWwpye9mzthuI845Jcu1ETE1mKb6RiOA9ZI4rRvDw</URL>\n
+        \  </ALBUM>\n </RESPONSE>\n</RESPONSES>\n"
+    http_version: 
+  recorded_at: Thu, 17 Apr 2014 17:22:34 GMT
+recorded_with: VCR 2.9.0

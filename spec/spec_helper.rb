@@ -1,5 +1,6 @@
 # require "gracenote"
 require(File.expand_path('../../lib/gracenote', __FILE__))
+require(File.expand_path('../../lib/gracenote/HTTP', __FILE__))
 
 require 'webmock/rspec'
 require 'vcr'
