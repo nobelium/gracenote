@@ -16,7 +16,7 @@ Turn.config do |c|
 end
  
 #VCR config
-VCR.config do |c|
+VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/gracenote_cassettes'
-  c.stub_with :webmock
+  c.hook_into :webmock
 end
