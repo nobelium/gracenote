@@ -1,0 +1,105 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://c7097600.web.cddbp.net/webapi/xml/1.0/
+    body:
+      encoding: UTF-8
+      string: |-
+        <QUERIES>
+                        <AUTH>
+                            <CLIENT>7097600-35312F0A797B9FE6F24AC32CDE64AC5B</CLIENT>
+                            <USER>259611531832193638-19110695509BAD8C550883C21A289003</USER>
+                        </AUTH>
+                        <QUERY CMD="CONTRIBUTOR_FETCH">
+                            <GN_ID>238498181-193BE2BA655E1490A3B8DF3ACCACEF3A</GN_ID>
+                    <OPTION>
+                      <PARAMETER>SELECT_EXTENDED</PARAMETER>
+                      <VALUE>IMAGE,MEDIAGRAPHY_IMAGES</VALUE>
+                    </OPTION>
+                        </QUERY>
+                    </QUERIES>
+    headers:
+      Cookie:
+      - ''
+      Content-Type:
+      - application/xml
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 17 Apr 2014 17:27:00 GMT
+      Server:
+      - Apache/2.2.14 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.3.2-1ubuntu4.20
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1612'
+      Connection:
+      - close
+      Content-Type:
+      - text/xml
+    body:
+      encoding: UTF-8
+      string: "\n\n \n<RESPONSES>\n <RESPONSE STATUS=\"OK\">\n   <CONTRIBUTOR>\n      <GN_ID>238498181-193BE2BA655E1490A3B8DF3ACCACEF3A</GN_ID>\n
+        \     <NAME>Vince Vaughn</NAME>\n      <DATE TYPE=\"BIRTH\">1970-03-28</DATE>\n
+        \     <PLACE TYPE=\"BIRTH\">Minneapolis, Minnesota, United States</PLACE>\n
+        \     <BIOGRAPHY>Born in Minnesota and raised in Illinois, actor Vince Vaughn
+        is primarily known for his comedic roles. Vaughn began auditioning for screen
+        parts in Hollywood during the late 1980s, initially getting one-off appearances
+        in episodes of the TV shows China Beach and 21 Jump Street. A few years after
+        a minor role in the football film, Rudy, Vaughn was cast, along with friend
+        Jon Favreau, as one of the leads in the &apos;96 indie comedy Swingers, a
+        surprise hit that led to significant attention for both aspiring actors. Vaughn
+        entered the big leagues the following year when Steven Spielberg cast him
+        in The Lost World: Jurassic Park, and numerous film roles followed, including
+        a starring role in Gus Van Sant&apos;s ill-conceived remake of Psycho. After
+        many of Vaughn&apos;s dramatic movies fared poorly, he revitalized his career
+        with the well-received comedy Old School in 2003 and generally opted to stay
+        within the genre, playing a villain in Starsky &amp; Hutch and starring in
+        the comedic blockbuster, Wedding Crashers. Following the massive success of
+        the latter film, Vaughn became a producer on some of his projects, including
+        Four Christmases and Couples Retreat. Following The Dilemma, a critically
+        derided comedy co-starring Kevin James, Vaughn reunited with frequent collaborator
+        Ben Stiller for the 2012 sci-fi comedy The Watch.</BIOGRAPHY>\n      <CONTRIBUTOR_TYPE
+        RANK=\"999\" ID=\"15961\">Screenwriter</CONTRIBUTOR_TYPE>\n      <CONTRIBUTOR_TYPE
+        RANK=\"999\" ID=\"15958\">Producer</CONTRIBUTOR_TYPE>\n      <CONTRIBUTOR_TYPE
+        RANK=\"999\" ID=\"15942\">Actor</CONTRIBUTOR_TYPE>\n      <MEDIAGRAPHY TYPE=\"SHORT\">\n
+        \        <AV_WORK RANK=\"1\">\n            <GN_ID>411874812-8FD58632744956B9855437255DFBA0E4</GN_ID>\n
+        \           <TITLE>Business or Pleasure</TITLE>\n            <DATE TYPE=\"ORIGINALRELEASE\">2014</DATE>\n
+        \           <CONTRIBUTION>\n               <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n            </CONTRIBUTION>\n         </AV_WORK>\n
+        \        <AV_WORK RANK=\"2\">\n            <GN_ID>274266963-6FE855CCAA8B2B7E8A17CB6BA0C087D9</GN_ID>\n
+        \           <TITLE>Anchorman 2: The Legend Continues</TITLE>\n            <DATE
+        TYPE=\"ORIGINALRELEASE\">2013-12-18</DATE>\n            <CONTRIBUTION>\n               <CONTRIBUTION_TYPE
+        MEDIASPACE=\"VIDEO\" ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n               <CHARACTER>Wes
+        Mantooth</CHARACTER>\n            </CONTRIBUTION>\n            <URL TYPE=\"IMAGE\"
+        SIZE=\"MEDIUM\" WIDTH=\"300\" HEIGHT=\"450\">http://akamai-b.cdn.cddbp.net/cds/2.0/image/1BDD/644C/03E9/B9BA_medium_front.jpg</URL>\n
+        \        </AV_WORK>\n         <AV_WORK RANK=\"3\">\n            <GN_ID>341996575-0F561930B86C5BA9A6C33C1B42CC8172</GN_ID>\n
+        \           <TITLE>The Delivery Man</TITLE>\n            <DATE TYPE=\"ORIGINALRELEASE\">2013-11-22</DATE>\n
+        \           <CONTRIBUTION>\n               <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n               <CHARACTER>David</CHARACTER>\n
+        \           </CONTRIBUTION>\n            <URL TYPE=\"IMAGE\" SIZE=\"MEDIUM\"
+        WIDTH=\"300\" HEIGHT=\"450\">http://akamai-b.cdn.cddbp.net/cds/2.0/image/687A/FA14/00FD/D1C3_medium_front.jpg</URL>\n
+        \        </AV_WORK>\n         <AV_WORK RANK=\"4\">\n            <GN_ID>374046631-27D8414D14C88F9CFB5A4369E9CD3072</GN_ID>\n
+        \           <TITLE>A Case of You</TITLE>\n            <DATE TYPE=\"ORIGINALRELEASE\">2013-11-06</DATE>\n
+        \           <CONTRIBUTION>\n               <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n               <CHARACTER>Alan</CHARACTER>\n
+        \           </CONTRIBUTION>\n            <URL TYPE=\"IMAGE\" SIZE=\"MEDIUM\"
+        WIDTH=\"300\" HEIGHT=\"450\">http://akamai-b.cdn.cddbp.net/cds/2.0/image/4DFE/0AED/2C02/5364_medium_front.jpg</URL>\n
+        \        </AV_WORK>\n      </MEDIAGRAPHY>\n      <URL TYPE=\"IMAGE\" SIZE=\"MEDIUM\"
+        WIDTH=\"308\" HEIGHT=\"450\">http://akamai-b.cdn.cddbp.net/cds/2.0/image/AC5C/2E1E/77ED/A1A6_medium_front.jpg</URL>\n
+        \  </CONTRIBUTOR>\n </RESPONSE>\n</RESPONSES>\n"
+    http_version: 
+  recorded_at: Thu, 17 Apr 2014 22:57:01 GMT
+recorded_with: VCR 2.9.0

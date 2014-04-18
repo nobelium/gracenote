@@ -1,0 +1,114 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://c7097600.web.cddbp.net/webapi/xml/1.0/
+    body:
+      encoding: UTF-8
+      string: |-
+        <QUERIES>
+                        <AUTH>
+                            <CLIENT>7097600-35312F0A797B9FE6F24AC32CDE64AC5B</CLIENT>
+                            <USER>259611531832193638-19110695509BAD8C550883C21A289003</USER>
+                        </AUTH>
+                        <QUERY CMD="SERIES_FETCH">
+                            <GN_ID>238078046-4B86F4187EE2D215784CE4266CB83EA9</GN_ID>
+                      <OPTION>
+                        <PARAMETER>SELECT_EXTENDED</PARAMETER>
+                        <VALUE>IMAGE</VALUE>
+                      </OPTION>
+                        </QUERY>
+                    </QUERIES>
+    headers:
+      Cookie:
+      - ''
+      Content-Type:
+      - application/xml
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 17 Apr 2014 17:26:55 GMT
+      Server:
+      - Apache/2.2.22 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.3.10-1ubuntu3.10
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1430'
+      Connection:
+      - close
+      Content-Type:
+      - text/xml
+    body:
+      encoding: UTF-8
+      string: "\n\n \n<RESPONSES>\n <RESPONSE STATUS=\"OK\">\n   <SERIES>\n      <GN_ID>238078046-4B86F4187EE2D215784CE4266CB83EA9</GN_ID>\n
+        \     <TITLE>Saved by the Bell</TITLE>\n      <DATE TYPE=\"ORIGINALRELEASE\">1989-08-20</DATE>\n
+        \     <PRODUCTION_TYPE ID=\"16641\">TV Series</PRODUCTION_TYPE>\n      <GENRE
+        ID=\"33756\">Comedy</GENRE>\n      <SYNOPSIS>The adventures of students at
+        California&apos;s Bayside High School.</SYNOPSIS>\n      <CONTRIBUTOR RANK=\"1\">\n
+        \        <NAME>Mark-Paul Gosselaar</NAME>\n         <GN_ID>238222381-E95F7B753BE55FC3211A3FDB1300D9CC</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n            <CHARACTER>Zachary &quot;Zack&quot;
+        Morris</CHARACTER>\n         </CONTRIBUTION>\n      </CONTRIBUTOR>\n      <CONTRIBUTOR
+        RANK=\"2\">\n         <NAME>Tiffani Thiessen</NAME>\n         <GN_ID>238181734-2EF408E08B75618B18C445D5BB09AE04</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n         </CONTRIBUTION>\n      </CONTRIBUTOR>\n
+        \     <CONTRIBUTOR RANK=\"3\">\n         <NAME>Mario Lopez</NAME>\n         <GN_ID>238804442-DEBDBB9EF3DFCF66B2D230DD83003A8A</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n            <CHARACTER>Albert Clifford
+        &quot;A.C&quot; Slater</CHARACTER>\n         </CONTRIBUTION>\n      </CONTRIBUTOR>\n
+        \     <CONTRIBUTOR RANK=\"4\">\n         <NAME>Elizabeth Berkley</NAME>\n
+        \        <GN_ID>238478646-5F53AE384C05357EA6471EE24C28EC31</GN_ID>\n         <CONTRIBUTION>\n
+        \           <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\" ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n
+        \        </CONTRIBUTION>\n      </CONTRIBUTOR>\n      <CONTRIBUTOR RANK=\"5\">\n
+        \        <NAME>Dustin Diamond</NAME>\n         <GN_ID>238201575-7E738F0FB3C086AACD35F7D1FD604711</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n            <CHARACTER>Samuel &quot;Screech&quot;
+        Powers</CHARACTER>\n         </CONTRIBUTION>\n      </CONTRIBUTOR>\n      <CONTRIBUTOR
+        RANK=\"6\">\n         <NAME>Lark Voorhies</NAME>\n         <GN_ID>238366001-0A44B1625BE507B5E7D56FCD60E3361D</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n            <CHARACTER>Lisa Turtle</CHARACTER>\n
+        \        </CONTRIBUTION>\n      </CONTRIBUTOR>\n      <CONTRIBUTOR RANK=\"7\">\n
+        \        <NAME>Dennis Haskins</NAME>\n         <GN_ID>238201828-E13220A6B7C8839B03CA39EA28C4FF26</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15942\">Actor</CONTRIBUTION_TYPE>\n         </CONTRIBUTION>\n      </CONTRIBUTOR>\n
+        \     <CONTRIBUTOR RANK=\"4\">\n         <NAME>Don Barnhart</NAME>\n         <GN_ID>238196422-CEB8D66C7E0078684BC4416614F32520</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15957\">Director</CONTRIBUTION_TYPE>\n         </CONTRIBUTION>\n      </CONTRIBUTOR>\n
+        \     <CONTRIBUTOR RANK=\"1\">\n         <NAME>Peter Engel</NAME>\n         <GN_ID>238859209-786477BE293055B6CF01343D68BBE70A</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15960\">Executive Producer</CONTRIBUTION_TYPE>\n         </CONTRIBUTION>\n
+        \     </CONTRIBUTOR>\n      <CONTRIBUTOR RANK=\"2\">\n         <NAME>Franco
+        Bario</NAME>\n         <GN_ID>238623233-E00F3CA8D949B21948AB38D21AFE6351</GN_ID>\n
+        \        <CONTRIBUTION>\n            <CONTRIBUTION_TYPE MEDIASPACE=\"VIDEO\"
+        ID=\"15958\">Producer</CONTRIBUTION_TYPE>\n         </CONTRIBUTION>\n      </CONTRIBUTOR>\n
+        \     <SEASON>\n         <GN_ID>238050049-B36CFD6F8B6FC76E2174F2A6E22515CD</GN_ID>\n
+        \        <TITLE>Season 1</TITLE>\n         <SEASON_NUM>1</SEASON_NUM>\n      </SEASON>\n
+        \     <SEASON>\n         <GN_ID>238066078-FCBAFFE0BFA30ACC6259AF644D87968C</GN_ID>\n
+        \        <TITLE>Season 2</TITLE>\n         <SEASON_NUM>2</SEASON_NUM>\n      </SEASON>\n
+        \     <SEASON>\n         <GN_ID>238053321-86A6089F7417C9AB35A83003373AADD7</GN_ID>\n
+        \        <TITLE>Season 3</TITLE>\n         <SEASON_NUM>3</SEASON_NUM>\n      </SEASON>\n
+        \     <SEASON>\n         <GN_ID>238057494-F58BA34C9B338725094691606E6D2136</GN_ID>\n
+        \        <TITLE>Season 4</TITLE>\n         <SEASON_NUM>4</SEASON_NUM>\n      </SEASON>\n
+        \     <SEASON>\n         <GN_ID>372724734-41137E62C5CBF953BB239C641117E430</GN_ID>\n
+        \        <TITLE>Season 5</TITLE>\n         <SEASON_NUM>5</SEASON_NUM>\n      </SEASON>\n
+        \     <SEASON>\n         <GN_ID>372954474-89E4C18060FAD8F8AD9D8B69F605AAB2</GN_ID>\n
+        \        <TITLE>Season 6</TITLE>\n         <SEASON_NUM>6</SEASON_NUM>\n      </SEASON>\n
+        \     <AV_WORK>\n         <GN_ID>240048356-14791569CE41F92D2CAEB12B119515B1</GN_ID>\n
+        \        <TITLE>Saved by the Bell Goes to College</TITLE>\n      </AV_WORK>\n
+        \     <URL TYPE=\"IMAGE\" SIZE=\"MEDIUM\" WIDTH=\"338\" HEIGHT=\"450\" COPYRIGHT=\"Lions
+        Gate\">http://akamai-b.cdn.cddbp.net/cds/2.0/image/66B1/6031/EAED/45D5_medium_front.jpg</URL>\n
+        \  </SERIES>\n </RESPONSE>\n</RESPONSES>\n"
+    http_version: 
+  recorded_at: Thu, 17 Apr 2014 22:56:56 GMT
+recorded_with: VCR 2.9.0

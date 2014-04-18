@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://c7097600.web.cddbp.net/webapi/xml/1.0/
+    body:
+      encoding: UTF-8
+      string: |-
+        <QUERIES>
+                        <AUTH>
+                            <CLIENT>7097600-35312F0A797B9FE6F24AC32CDE64AC5B</CLIENT>
+                            <USER>259611531832193638-19110695509BAD8C550883C21A289003</USER>
+                        </AUTH>
+                        <QUERY CMD="SEASON_FETCH">
+                            <GN_ID>238050049-B36CFD6F8B6FC76E2174F2A6E22515CD</GN_ID>
+                        </QUERY>
+                    </QUERIES>
+    headers:
+      Cookie:
+      - ''
+      Content-Type:
+      - application/xml
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 17 Apr 2014 17:26:57 GMT
+      Server:
+      - Apache/2.2.22 (Ubuntu)
+      X-Powered-By:
+      - PHP/5.3.10-1ubuntu3.10
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '1019'
+      Connection:
+      - close
+      Content-Type:
+      - text/xml
+    body:
+      encoding: UTF-8
+      string: "\n\n \n<RESPONSES>\n <RESPONSE STATUS=\"OK\">\n   <SEASON>\n      <GN_ID>238050049-B36CFD6F8B6FC76E2174F2A6E22515CD</GN_ID>\n
+        \     <TITLE>Season 1</TITLE>\n      <PRODUCTION_TYPE ID=\"16641\">TV Series</PRODUCTION_TYPE>\n
+        \     <GENRE ID=\"33756\">Comedy</GENRE>\n      <SERIES>\n         <GN_ID>238078046-4B86F4187EE2D215784CE4266CB83EA9</GN_ID>\n
+        \        <TITLE>Saved by the Bell</TITLE>\n      </SERIES>\n      <SEASON_NUM>1</SEASON_NUM>\n
+        \     <AV_WORK>\n         <GN_ID>238692983-11EA09C5735997DCC8B7C522513EEA3C</GN_ID>\n
+        \        <TITLE>Dancing to the Max</TITLE>\n         <EPISODE_NUM>1</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>239516360-7956FA12995858DE2D6A64FB1BE0FE48</GN_ID>\n
+        \        <TITLE>The Lisa Card</TITLE>\n         <EPISODE_NUM>2</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>239300465-2395A4C7E44F63D0486F4DB813453C95</GN_ID>\n
+        \        <TITLE>The Gift</TITLE>\n         <EPISODE_NUM>3</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>239128169-F6612D0B9B29C5A501FAE2716A82DF85</GN_ID>\n
+        \        <TITLE>Fatal Distraction</TITLE>\n         <EPISODE_NUM>4</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>240077738-F8173EC473E7EB7F265AA8D3F4217F69</GN_ID>\n
+        \        <TITLE>Screech&apos;s Woman</TITLE>\n         <EPISODE_NUM>5</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>238257707-F8E9BA14F38E7BE566847F94F005A685</GN_ID>\n
+        \        <TITLE>Aloha Slater</TITLE>\n         <EPISODE_NUM>6</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>240216499-AB3B47368C902EA34E3C10BD0AD733F4</GN_ID>\n
+        \        <TITLE>The Substitute</TITLE>\n         <EPISODE_NUM>7</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>238731495-E8E824D919019032F205E2FAF9E884E0</GN_ID>\n
+        \        <TITLE>Cream for a Day</TITLE>\n         <EPISODE_NUM>8</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>239909628-22FFB4CE76C7A3D8A56B1E80672E56C3</GN_ID>\n
+        \        <TITLE>Pinned to the Mat</TITLE>\n         <EPISODE_NUM>9</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>238651432-7190562A600B3DBF085B847E5F15EB2C</GN_ID>\n
+        \        <TITLE>The Beauty and the Screech</TITLE>\n         <EPISODE_NUM>10</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>239069779-5242BC7D48CBBC6628C3C2DC5A9B9A7A</GN_ID>\n
+        \        <TITLE>The Friendship Business</TITLE>\n         <EPISODE_NUM>11</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>239462042-79C1E3742D31F0A86D614BA72DDDEDFC</GN_ID>\n
+        \        <TITLE>The Mamas and the Papas</TITLE>\n         <EPISODE_NUM>12</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>238944435-D655EF785CE008EB77B71407FF02E76C</GN_ID>\n
+        \        <TITLE>The Election</TITLE>\n         <EPISODE_NUM>13</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>240231137-BC8FE99ACD2C39E9F3F117A9FE04965E</GN_ID>\n
+        \        <TITLE>The Zack Tapes</TITLE>\n         <EPISODE_NUM>14</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>239547367-10CA8FC3EB705719A1238461802DB32A</GN_ID>\n
+        \        <TITLE>King of the Hill</TITLE>\n         <EPISODE_NUM>15</EPISODE_NUM>\n
+        \     </AV_WORK>\n      <AV_WORK>\n         <GN_ID>240047886-500E965B68EC60490FDD1F1546116AC8</GN_ID>\n
+        \        <TITLE>Save That Tiger</TITLE>\n         <EPISODE_NUM>16</EPISODE_NUM>\n
+        \     </AV_WORK>\n   </SEASON>\n </RESPONSE>\n</RESPONSES>\n"
+    http_version: 
+  recorded_at: Thu, 17 Apr 2014 22:56:58 GMT
+recorded_with: VCR 2.9.0
