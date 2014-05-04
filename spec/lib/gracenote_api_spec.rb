@@ -12,6 +12,10 @@ describe Gracenote do
     after do 
       VCR.eject_cassette
     end
+  
+    it "must have a findTrack method" do
+      gn.should respond_to :findTrack
+    end
 
     it "records new track fixture" do
       gn.findTrack("Kings Of Convenience", "Riot On An Empty Street", "Homesick", '0')
@@ -26,7 +30,11 @@ describe Gracenote do
     after do 
       VCR.eject_cassette
     end
-
+    
+    it "must have a findTVShow method" do
+      gn.should respond_to :findTVShow
+    end
+    
     it "records new tv show fixture" do
       gn.findTVShow('saved by the bell').inspect
     end
@@ -39,7 +47,11 @@ describe Gracenote do
 
     after do 
       VCR.eject_cassette
-    end    
+    end
+
+    it "must have a fetchTVShow method" do
+      gn.should respond_to :fetchTVShow
+    end
 
     it "records fetching a tv show" do 
       gn.fetchTVShow('238078046-4B86F4187EE2D215784CE4266CB83EA9')
@@ -55,6 +67,10 @@ describe Gracenote do
       VCR.eject_cassette
     end    
 
+    it "must have a fetchSeason method" do
+      gn.should respond_to :fetchSeason
+    end
+
     it "records fetching a season" do
       gn.fetchSeason('238050049-B36CFD6F8B6FC76E2174F2A6E22515CD')
     end
@@ -69,6 +85,10 @@ describe Gracenote do
       VCR.eject_cassette
     end    
 
+    it "must have a findContributor method" do
+      gn.should respond_to :findContributor
+    end
+
     it "records finding a contributor" do 
       gn.findContributor('vince vaughn')
     end
@@ -82,6 +102,10 @@ describe Gracenote do
     after do 
       VCR.eject_cassette
     end    
+
+    it "must have a fetchContributor method" do
+      gn.should respond_to :fetchContributor
+    end
 
     it "records finding a contributor using gn_id" do
       gn.fetchContributor('238498181-193BE2BA655E1490A3B8DF3ACCACEF3A')
