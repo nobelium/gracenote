@@ -20,6 +20,10 @@ describe Gracenote do
     it "records new track fixture" do
       gn.findTrack("Kings Of Convenience", "Riot On An Empty Street", "Homesick", '0')
     end
+
+    it "returns result for findTrack query" do
+      gn.findTrack("Kings Of Convenience", "Riot On An Empty Street", "Homesick", '0').should_not == nil
+    end
   end
 
   describe "findTVShow" do
@@ -37,6 +41,10 @@ describe Gracenote do
     
     it "records new tv show fixture" do
       gn.findTVShow('saved by the bell').inspect
+    end
+
+    it "returns result for findTVShow query" do
+      gn.findTVShow('saved by the bell').inspect.should_not == nil
     end
   end
 
@@ -56,6 +64,10 @@ describe Gracenote do
     it "records fetching a tv show" do 
       gn.fetchTVShow('238078046-4B86F4187EE2D215784CE4266CB83EA9')
     end
+
+    it "returns result for fetchTVShow query" do 
+      gn.fetchTVShow('238078046-4B86F4187EE2D215784CE4266CB83EA9').should_not == nil
+    end
   end
 
   describe "fetchSeason" do 
@@ -73,6 +85,10 @@ describe Gracenote do
 
     it "records fetching a season" do
       gn.fetchSeason('238050049-B36CFD6F8B6FC76E2174F2A6E22515CD')
+    end
+
+    it "returns result for fetchSeason query" do
+      gn.fetchSeason('238050049-B36CFD6F8B6FC76E2174F2A6E22515CD').should_not == nil
     end
   end
 
@@ -92,6 +108,10 @@ describe Gracenote do
     it "records finding a contributor" do 
       gn.findContributor('vince vaughn')
     end
+
+    it "returns result for findContributor query" do 
+      gn.findContributor('vince vaughn').should_not == nil
+    end
   end
 
   describe "fetchContributor" do 
@@ -109,6 +129,10 @@ describe Gracenote do
 
     it "records finding a contributor using gn_id" do
       gn.fetchContributor('238498181-193BE2BA655E1490A3B8DF3ACCACEF3A')
+    end
+
+    it "returns result for fetchContributor query" do
+      gn.fetchContributor('238498181-193BE2BA655E1490A3B8DF3ACCACEF3A').should_not == nil
     end
   end
 end
