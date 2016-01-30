@@ -252,7 +252,7 @@ class Gracenote
   # Arguments:
   #   query
   def api (query)
-    return HTTP.post(@apiURL, query)
+    return Gracenote::HTTP.post(@apiURL, query)
   end
   
   # Function: constructQueryReq
