@@ -233,8 +233,8 @@ class Gracenote
     check_res(resp)
   end
 
-  ###################################################### protected methods ######################################################
-  protected
+  ###################################################### private methods ######################################################
+  private
   # Function: api
   # execute a query on gracenote webapi
   # Arguments:
