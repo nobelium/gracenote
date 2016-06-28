@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Gracenote do 
 
-  let(:gn) { Gracenote.new({:clientID => "7097600", :clientTag => "35312F0A797B9FE6F24AC32CDE64AC5B", :userID => "259611531832193638-19110695509BAD8C550883C21A289003"}) }
+  let(:gn) { Gracenote.new({:client_id => "7097600", :client_tag => "35312F0A797B9FE6F24AC32CDE64AC5B", :user_id => "259611531832193638-19110695509BAD8C550883C21A289003"}) }
 
   describe "track_api" do
     before do 
@@ -13,20 +13,21 @@ describe Gracenote do
       VCR.eject_cassette
     end
   
-    it "must have a findTrack method" do
-      gn.should respond_to :findTrack
+    it "must have a find_track method" do
+      expect(gn).to respond_to :find_track
     end
 
     it "records new track fixture" do
-      gn.findTrack("Kings Of Convenience", "Riot On An Empty Street", "Homesick", '0')
+      gn.find_track("Kings Of Convenience", "Riot On An Empty Street", "Homesick", '0')
     end
 
-    it "returns result for findTrack query" do
-      gn.findTrack("Kings Of Convenience", "Riot On An Empty Street", "Homesick", '0').should_not == nil
+    context "returns result for find_track query" do
+      subject(:response) { gn.find_track("Kings Of Convenience", "Riot On An Empty Street", "Homesick", '0') }
+      it { is_expected.to be }
     end
   end
 
-  describe "findTVShow" do
+  describe "find_tv_show" do
     before do 
       VCR.insert_cassette 'tvshow_find', :record => :new_episodes
     end
@@ -35,20 +36,21 @@ describe Gracenote do
       VCR.eject_cassette
     end
     
-    it "must have a findTVShow method" do
-      gn.should respond_to :findTVShow
+    it "must have a find_tv_show method" do
+      expect(gn).to respond_to :find_tv_show
     end
     
     it "records new tv show fixture" do
-      gn.findTVShow('saved by the bell').inspect
+      gn.find_tv_show('saved by the bell').inspect
     end
 
-    it "returns result for findTVShow query" do
-      gn.findTVShow('saved by the bell').inspect.should_not == nil
+    context "returns result for find_tv_show query" do
+      subject(:inspect) { gn.find_tv_show('saved by the bell').inspect }
+      it { is_expected.to be }
     end
   end
 
-  describe "fetchTVShow" do 
+  describe "fetch_tv_show" do
     before do 
       VCR.insert_cassette 'tvshow_fetch', :record => :new_episodes
     end
@@ -57,20 +59,21 @@ describe Gracenote do
       VCR.eject_cassette
     end
 
-    it "must have a fetchTVShow method" do
-      gn.should respond_to :fetchTVShow
+    it "must have a fetch_tv_show method" do
+      expect(gn).to respond_to :fetch_tv_show
     end
 
     it "records fetching a tv show" do 
-      gn.fetchTVShow('238078046-4B86F4187EE2D215784CE4266CB83EA9')
+      gn.fetch_tv_show('238078046-4B86F4187EE2D215784CE4266CB83EA9')
     end
 
-    it "returns result for fetchTVShow query" do 
-      gn.fetchTVShow('238078046-4B86F4187EE2D215784CE4266CB83EA9').should_not == nil
+    context "returns result for fetch_tv_show query" do
+      subject(:show) { gn.fetch_tv_show('238078046-4B86F4187EE2D215784CE4266CB83EA9') }
+      it { is_expected.to be }
     end
   end
 
-  describe "fetchSeason" do 
+  describe "fetch_season" do
     before do 
       VCR.insert_cassette 'tvshow_fetch_season', :record => :new_episodes
     end
@@ -79,20 +82,22 @@ describe Gracenote do
       VCR.eject_cassette
     end    
 
-    it "must have a fetchSeason method" do
-      gn.should respond_to :fetchSeason
+    it "must have a fetch_season method" do
+      expect(gn).to respond_to :fetch_season
     end
 
     it "records fetching a season" do
-      gn.fetchSeason('238050049-B36CFD6F8B6FC76E2174F2A6E22515CD')
+      gn.fetch_season('238050049-B36CFD6F8B6FC76E2174F2A6E22515CD')
     end
 
-    it "returns result for fetchSeason query" do
-      gn.fetchSeason('238050049-B36CFD6F8B6FC76E2174F2A6E22515CD').should_not == nil
+    context "returns result for fetch_season query" do
+
+      subject(:season) { gn.fetch_season('238050049-B36CFD6F8B6FC76E2174F2A6E22515CD') }
+      it { is_expected.to be }
     end
   end
 
-  describe "findContributor" do 
+  describe "find_contributor" do
     before do 
       VCR.insert_cassette 'tvshow_find_contributor', :record => :new_episodes
     end
@@ -101,20 +106,21 @@ describe Gracenote do
       VCR.eject_cassette
     end    
 
-    it "must have a findContributor method" do
-      gn.should respond_to :findContributor
+    it "must have a find_contributor method" do
+      expect(gn).to respond_to :find_contributor
     end
 
     it "records finding a contributor" do 
-      gn.findContributor('vince vaughn')
+      gn.find_contributor('vince vaughn')
     end
 
-    it "returns result for findContributor query" do 
-      gn.findContributor('vince vaughn').should_not == nil
+    context "returns result for find_contributor query" do
+      subject(:contributor) { gn.find_contributor('vince vaughn') }
+      it { is_expected.to be }
     end
   end
 
-  describe "fetchContributor" do 
+  describe "fetch_contributor" do
     before do 
       VCR.insert_cassette 'tvshow_fetch_contributor', :record => :new_episodes
     end
@@ -123,16 +129,17 @@ describe Gracenote do
       VCR.eject_cassette
     end    
 
-    it "must have a fetchContributor method" do
-      gn.should respond_to :fetchContributor
+    it "must have a fetch_contributor method" do
+      expect(gn).to respond_to :fetch_contributor
     end
 
     it "records finding a contributor using gn_id" do
-      gn.fetchContributor('238498181-193BE2BA655E1490A3B8DF3ACCACEF3A')
+      gn.fetch_contributor('238498181-193BE2BA655E1490A3B8DF3ACCACEF3A')
     end
 
-    it "returns result for fetchContributor query" do
-      gn.fetchContributor('238498181-193BE2BA655E1490A3B8DF3ACCACEF3A').should_not == nil
+    context "returns result for fetch_contributor query" do
+      subject(:contributor) { gn.fetch_contributor('238498181-193BE2BA655E1490A3B8DF3ACCACEF3A') }
+      it { is_expected.to be }
     end
   end
 end
